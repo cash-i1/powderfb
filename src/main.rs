@@ -1,19 +1,24 @@
 use minifb::*;
 
+struct WindowDimensions {
+    width: usize,
+    height: usize,
+}
+
 struct Graphics {
     buffer: Vec<u32>,
-    dimensions: (usize, usize),
+    dimensions: WindowDimensions,
     window: Window,
 }
 
 impl Graphics {
-    fn new(win_width: usize, win_height: usize) -> Self {
-        let buffer = vec![0u32; win_width * win_height];
+    fn new(width: usize, height: usize) -> Self {
+        let buffer = vec![0u32; width * height];
 
         let window = Window::new(
             "window",
-            win_width,
-            win_height,
+            width,
+            height,
             WindowOptions {
                 ..WindowOptions::default()
             },
@@ -22,7 +27,7 @@ impl Graphics {
 
         Self {
             buffer,
-            dimensions: (win_width, win_height),
+            dimensions: WindowDimensions {width, height},
             window,
         }
     }
@@ -30,18 +35,18 @@ impl Graphics {
         for i in 0..width {
             for j in 0..height {
                 let (new_x, new_y) = (i + x, j + y);
-                let new = new_x * self.dimensions.0 + new_y;
+                let new = new_x * self.dimensions.width + new_y;
                 self.buffer[new] = 99999;
             }
         }
     }
 
     fn pixel(&mut self, (x, y): (usize, usize)) {
-        self.buffer[y * self.dimensions.0 + x] = 1111;
+        self.buffer[y * self.dimensions.width + x] = 1111;
     }
     fn update(&mut self) {
         self.window
-            .update_with_buffer(&self.buffer, self.dimensions.0, self.dimensions.1)
+            .update_with_buffer(&self.buffer, self.dimensions.width, self.dimensions.height)
             .unwrap();
     }
 }
