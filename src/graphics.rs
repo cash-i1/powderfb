@@ -1,5 +1,5 @@
-use minifb::*;
 use crate::misc::WindowDimensions;
+use minifb::*;
 
 pub struct Graphics {
     pub buffer: Vec<u32>,
@@ -15,8 +15,10 @@ impl Graphics {
         for i in 0..width {
             for j in 0..height {
                 let (new_x, new_y) = (i + x, j + y);
-                let new = new_x * self.dimensions.width + new_y;
-                self.buffer[new] = 99999;
+                let new = new_y * self.dimensions.width + new_x;
+                if let Some(buf) = self.buffer.get_mut(new) {
+                    *buf = 99999;
+                }
             }
         }
     }
@@ -34,14 +36,14 @@ impl Graphics {
 pub struct GraphicsBuilder {
     buffer: Option<Vec<u32>>,
     dimensions: Option<WindowDimensions>,
-    fps: Option<usize>
+    fps: Option<usize>,
 }
 impl GraphicsBuilder {
     pub fn new() -> Self {
         Self {
             buffer: None,
             dimensions: None,
-            fps: None
+            fps: None,
         }
     }
     pub fn width(&mut self, width: usize) -> &mut Self {
@@ -65,8 +67,8 @@ impl GraphicsBuilder {
         self
     }
     pub fn build(&mut self) -> Graphics {
-        let buffer = self.buffer.take().unwrap();
         let dimensions = self.dimensions.take().unwrap();
+        let buffer = vec![0u32; dimensions.width * dimensions.height];
 
         let mut window = Window::new(
             "window",
@@ -89,4 +91,3 @@ impl GraphicsBuilder {
         }
     }
 }
-
