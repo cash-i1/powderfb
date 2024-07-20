@@ -10,7 +10,7 @@ pub struct World {
 
 impl World {
     pub fn new(world_width: usize, world_height: usize, cell_width: usize, cell_height: usize) -> Self {
-        let mut particles = vec![vec![Particle { color: 12981}; world_width as usize]; world_height as usize];
+        let mut particles = vec![vec![Particle { color: 100 }; world_height as usize]; world_width as usize];
         println!("{:#?}", particles);
 
         World {

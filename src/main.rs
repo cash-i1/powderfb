@@ -42,11 +42,11 @@ fn main() {
         for (x, i) in world.particles.iter().enumerate() {
             for (y, particle) in i.iter().enumerate() {
                 let rect = Rectangle {
-                    x,
-                    y,
-                    width: cell_size,
-                    height: cell_size,
-                    color: particle.color,
+                    x: world.cell_width * x,
+                    y: world.cell_height * y,
+                    width: world.cell_width,
+                    height: world.cell_height,
+                    color:  rand::random::<u32>(),
                 };
                 gfx.rectangle(rect);
             }
