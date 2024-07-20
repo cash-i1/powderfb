@@ -31,15 +31,17 @@ fn main() {
     let mut ui = Ui::new();
 
     while gfx.window.is_open() {
-        if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
-            if gfx.window.get_mouse_down(MouseButton::Left) {
-                gfx.window.set_cursor_style(CursorStyle::Crosshair);
-                let pos = (x as usize / cell_size, y as usize / cell_size);
-                world.particles[pos.0][pos.1] = Some(Particle {
-                    color: rand::random::<u32>(),
-                });
-            } else {
-                gfx.window.set_cursor_style(CursorStyle::Arrow);
+        if ui.ui_focused == false {
+            if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
+                if gfx.window.get_mouse_down(MouseButton::Left) {
+                    gfx.window.set_cursor_style(CursorStyle::Crosshair);
+                    let pos = (x as usize / cell_size, y as usize / cell_size);
+                    world.particles[pos.0][pos.1] = Some(Particle {
+                        color: rand::random::<u32>(),
+                    });
+                } else {
+                    gfx.window.set_cursor_style(CursorStyle::Arrow);
+                }
             }
         }
 
