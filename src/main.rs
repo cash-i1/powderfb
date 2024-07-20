@@ -4,7 +4,7 @@ pub mod world;
 
 use graphics::*;
 use minifb::*;
-use misc::Rectangle;
+use misc::{Particle, Rectangle};
 use world::*;
 
 fn main() {
@@ -19,7 +19,7 @@ fn main() {
         .resizeable(true)
         .build();
 
-    let world = World::new(
+    let mut world = World::new(
         screen_width / cell_size,
         screen_height / cell_size,
         cell_size,
@@ -28,15 +28,12 @@ fn main() {
 
     while gfx.window.is_open() {
         if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
-            if (x as usize) < gfx.dimensions.width && (y as usize) < gfx.dimensions.height {
-                let rect = Rectangle {
-                    x: x as usize,
-                    y: y as usize,
-                    height: 10,
-                    width: 10,
-                    color: x as u32,
-                };
-                gfx.rectangle(rect);
+            if gfx.window.get_mouse_down(MouseButton::Left) {
+                if (x as usize) < gfx.dimensions.width && (y as usize) < gfx.dimensions.height {
+
+                    let pos = (x as usize / cell_size, y as usize / cell_size);
+                    world.particles[pos.0][pos.1] = Some(Particle { color: rand::random::<u32>()});
+                }
             }
         }
 
