@@ -16,7 +16,7 @@ fn main() {
         .width(screen_width)
         .height(screen_height)
         .fps(60)
-        .resizeable(true)
+        .resizeable(false)
         .build();
 
     let mut world = World::new(
@@ -29,11 +29,13 @@ fn main() {
     while gfx.window.is_open() {
         if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
             if gfx.window.get_mouse_down(MouseButton::Left) {
-                if (x as usize) < gfx.dimensions.width && (y as usize) < gfx.dimensions.height {
-
-                    let pos = (x as usize / cell_size, y as usize / cell_size);
-                    world.particles[pos.0][pos.1] = Some(Particle { color: rand::random::<u32>()});
-                }
+                gfx.window.set_cursor_style(CursorStyle::Crosshair);
+                let pos = (x as usize / cell_size, y as usize / cell_size);
+                world.particles[pos.0][pos.1] = Some(Particle {
+                    color: rand::random::<u32>(),
+                });
+            } else {
+                gfx.window.set_cursor_style(CursorStyle::Arrow);
             }
         }
 
