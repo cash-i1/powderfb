@@ -1,16 +1,18 @@
 pub mod graphics;
 pub mod misc;
+pub mod ui;
 pub mod world;
 
 use graphics::*;
 use minifb::*;
 use misc::{Particle, Rectangle};
+use ui::*;
 use world::*;
 
 fn main() {
     let screen_width = 1280;
     let screen_height = 720;
-    let cell_size = 10;
+    let cell_size = 20;
 
     let mut gfx = Graphics::builder()
         .width(screen_width)
@@ -25,6 +27,8 @@ fn main() {
         cell_size,
         cell_size,
     );
+
+    let mut ui = Ui::new();
 
     while gfx.window.is_open() {
         if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
@@ -54,6 +58,9 @@ fn main() {
             }
         }
         world.step();
+        {
+            ui.draw(&mut gfx);
+        }
         gfx.update();
     }
 }
