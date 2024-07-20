@@ -34,14 +34,14 @@ impl Graphics {
 }
 
 pub struct GraphicsBuilder {
-    buffer: Option<Vec<u32>>,
     dimensions: Option<WindowDimensions>,
     fps: Option<usize>,
+    resizable: bool,
 }
 impl GraphicsBuilder {
     pub fn new() -> Self {
         Self {
-            buffer: None,
+            resizable: false,
             dimensions: None,
             fps: None,
         }
@@ -66,17 +66,24 @@ impl GraphicsBuilder {
         self.fps = Some(fps);
         self
     }
+    pub fn resizeable(&mut self, resizable: bool) -> &mut Self {
+        self.resizable = resizable;
+        self
+    }
+
     pub fn build(&mut self) -> Graphics {
         let dimensions = self.dimensions.take().unwrap();
         let buffer = vec![0u32; dimensions.width * dimensions.height];
+
+        let mut window_opts = WindowOptions::default();
+
+        window_opts.resize = self.resizable;
 
         let mut window = Window::new(
             "window",
             dimensions.width,
             dimensions.height,
-            WindowOptions {
-                ..WindowOptions::default()
-            },
+            window_opts,
         )
         .expect("unable to create the window");
 

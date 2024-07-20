@@ -16,6 +16,7 @@ fn main() {
         .width(screen_width)
         .height(screen_height)
         .fps(60)
+        .resizeable(true)
         .build();
 
     let mut world = World::new(
