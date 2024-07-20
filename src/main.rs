@@ -19,7 +19,7 @@ fn main() {
         .resizeable(true)
         .build();
 
-    let mut world = World::new(
+    let world = World::new(
         screen_width / cell_size,
         screen_height / cell_size,
         cell_size,
@@ -42,14 +42,16 @@ fn main() {
 
         for (x, i) in world.particles.iter().enumerate() {
             for (y, particle) in i.iter().enumerate() {
-                let rect = Rectangle {
-                    x: world.cell_width * x,
-                    y: world.cell_height * y,
-                    width: world.cell_width,
-                    height: world.cell_height,
-                    color:  rand::random::<u32>(),
-                };
-                gfx.rectangle(rect);
+                if let Some(p) = particle {
+                    let rect = Rectangle {
+                        x: world.cell_width * x,
+                        y: world.cell_height * y,
+                        width: world.cell_width,
+                        height: world.cell_height,
+                        color: p.color,
+                    };
+                    gfx.rectangle(rect);
+                }
             }
         }
         gfx.update();
