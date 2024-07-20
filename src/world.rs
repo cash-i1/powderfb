@@ -29,13 +29,18 @@ impl World {
     }
     pub fn step(&mut self) {
         self.game_tick += 1;
-        for i in (0..self.particles.len()).rev() {
-            for j in 0..self.particles[i].len() {
-                if let Some(particle) = self.particles[i][j].take() {
-                    if j + 1 < self.particles[i].len() && self.particles[i][j + 1].is_none() {
-                        self.particles[i][j + 1] = Some(particle);
+
+        if self.game_tick % 20 == 0 {
+            for i in (0..self.particles.len()) {
+                for j in (0..self.particles[i].len()).rev() {
+                    if let Some(particle) = self.particles[i][j].take() {
+                        if j + 1 < self.particles[i].len() && self.particles[i][j + 1].is_none() {
+                            self.particles[i][j + 1] = Some(particle);
+                        } else {
+                            self.particles[i][j] = Some(particle);
+                        }
                     } else {
-                        self.particles[i][j] = Some(particle);
+                        self.particles[i][j] = None;
                     }
                 }
             }

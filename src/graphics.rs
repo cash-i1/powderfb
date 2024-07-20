@@ -30,6 +30,8 @@ impl Graphics {
         self.window
             .update_with_buffer(&self.buffer, self.dimensions.width, self.dimensions.height)
             .unwrap();
+
+        self.buffer.fill(0x000000); // i cant believe this was the fix :facepalm:
     }
 }
 
