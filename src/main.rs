@@ -45,6 +45,7 @@ fn main() {
                     } else {
                         world.particles[pos.0][pos.1] = Some(Particle {
                             color: rand::random::<u32>(),
+                            properties: None,
                         });
                     }
                 } else {
