@@ -8,7 +8,7 @@ pub mod simulate;
 use graphics::*;
 use minifb::*;
 use misc::Rectangle;
-use particle::Particle;
+use particle::{Particle, ParticleProperties};
 use ui::*;
 use world::*;
 
@@ -46,7 +46,7 @@ fn main() {
                     } else {
                         world.particles[pos.0][pos.1] = Some(Particle {
                             color: rand::random::<u32>(),
-                            properties: None,
+                            properties: Some(ParticleProperties::default()),
                         });
                     }
                 } else {

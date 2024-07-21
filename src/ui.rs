@@ -1,7 +1,7 @@
 use crate::graphics::Graphics;
 use crate::misc::Rectangle;
+use crate::particle::particles;
 use crate::particle::Particle;
-use crate::particle::PARTICLES;
 use crate::World;
 
 pub struct Button {
@@ -25,7 +25,7 @@ impl Ui {
     pub fn init(&mut self) {
         if self.buttons.is_none() {
             let mut buttons = vec![];
-            for (i, particle) in PARTICLES.iter().enumerate() {
+            for (i, particle) in particles().iter().enumerate() {
                 let btn = Button {
                     rect: Rectangle {
                         color: particle.color,
@@ -56,7 +56,7 @@ impl Ui {
                         self.focused = true;
                         btn.focused = true;
                         if gfx.window.get_mouse_down(minifb::MouseButton::Left) {
-                            world.selected_particle = Some(PARTICLES[i].clone()).clone();
+                            world.selected_particle = Some(particles()[i].clone()).clone();
                         }
                     } else {
                         btn.focused = false;
@@ -68,7 +68,6 @@ impl Ui {
     pub fn draw(&mut self, gfx: &mut Graphics) {
         if let Some(buttons) = &mut self.buttons {
             for btn in buttons {
-                println!("button: {}", btn.focused);
                 if btn.focused {
                     btn.rect.color = btn.focused_color;
                 } else {
