@@ -5,7 +5,7 @@ pub fn particles() -> Vec<Particle> {
             properties: Some(ParticleProperties {
                 name: String::from(""),
                 mass: 1,
-                derives: ParticleType::Still,
+                derives: ParticleType::Sand,
             }),
         },
         Particle {
@@ -26,10 +26,10 @@ pub fn particles() -> Vec<Particle> {
 
 #[derive(Default, Clone, Debug)]
 pub enum ParticleType {
-    #[default]
     Still, // does not move
     Sand,
     Water,
+    #[default]
     Basic, // goes down only
 }
 

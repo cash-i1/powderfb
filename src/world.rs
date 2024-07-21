@@ -36,7 +36,7 @@ impl World {
         if self.game_tick % 2 == 0 {
             for i in 0..self.particles.len() {
                 for j in (0..self.particles[i].len()).rev() {
-                    Simulate::still(self, (i, j));
+                    Simulate::auto(self, (i, j));
                 }
             }
         }
