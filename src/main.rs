@@ -36,9 +36,14 @@ fn main() {
                 if gfx.window.get_mouse_down(MouseButton::Left) {
                     gfx.window.set_cursor_style(CursorStyle::Crosshair);
                     let pos = (x as usize / cell_size, y as usize / cell_size);
-                    world.particles[pos.0][pos.1] = Some(Particle {
-                        color: rand::random::<u32>(),
-                    });
+
+                    if let Some(particle) = world.selected_particle.clone() {
+                        world.particles[pos.0][pos.1] = Some(particle);
+                    } else {
+                        world.particles[pos.0][pos.1] = Some(Particle {
+                            color: rand::random::<u32>(),
+                        });
+                    }
                 } else {
                     gfx.window.set_cursor_style(CursorStyle::Arrow);
                 }
@@ -61,7 +66,7 @@ fn main() {
         }
         world.step();
         {
-            ui.draw(&mut gfx);
+            ui.draw(&mut gfx, &mut world);
         }
         gfx.update();
     }

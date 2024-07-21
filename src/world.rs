@@ -7,6 +7,7 @@ pub struct World {
     pub cell_width: usize,
     pub cell_height: usize,
     pub game_tick: u32,
+    pub selected_particle: Option<Particle>,
 }
 
 impl World {
@@ -25,6 +26,7 @@ impl World {
             cell_width,
             cell_height,
             game_tick: 0,
+            selected_particle: None,
         }
     }
     pub fn step(&mut self) {
