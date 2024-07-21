@@ -1,4 +1,5 @@
 use crate::particle::Particle;
+use crate::simulate::Simulate;
 
 pub struct World {
     pub particles: Vec<Vec<Option<Particle>>>,
@@ -35,15 +36,7 @@ impl World {
         if self.game_tick % 2 == 0 {
             for i in 0..self.particles.len() {
                 for j in (0..self.particles[i].len()).rev() {
-                    if let Some(particle) = self.particles[i][j].take() {
-                        if j + 1 < self.particles[i].len() && self.particles[i][j + 1].is_none() {
-                            self.particles[i][j + 1] = Some(particle);
-                        } else {
-                            self.particles[i][j] = Some(particle);
-                        }
-                    } else {
-                        self.particles[i][j] = None;
-                    }
+                    Simulate::still(self, (i, j));
                 }
             }
         }

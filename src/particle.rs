@@ -18,11 +18,11 @@ pub const PARTICLES: [Particle; 4] = [
 ];
 
 #[derive(Default, Clone, Debug)]
-pub enum ParticleRoots {
+pub enum ParticleType {
     #[default]
     Sand,
     Water,
-    Static, // does not move
+    Still, // does not move
     Basic, // goes down only
 }
 
@@ -30,7 +30,7 @@ pub enum ParticleRoots {
 pub struct ParticleProperties {
     name: String,
     mass: u32,
-    derives: ParticleRoots
+    derives: ParticleType
 }
 
 #[derive(Default, Clone, Debug)]

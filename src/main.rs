@@ -3,6 +3,7 @@ pub mod misc;
 pub mod particle;
 pub mod ui;
 pub mod world;
+pub mod simulate;
 
 use graphics::*;
 use minifb::*;
