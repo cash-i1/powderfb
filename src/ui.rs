@@ -35,7 +35,7 @@ impl Ui {
                         y: 10,
                     },
                     focused: false,
-                    focused_color: particle.color >> 1,
+                    focused_color: (particle.color & 0xfefefe) >> 1,
                     default_color: particle.color,
                 };
                 buttons.push(btn);

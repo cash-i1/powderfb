@@ -6,15 +6,33 @@ pub fn particles() -> Vec<Particle> {
                 name: Some("sand".to_string()),
                 mass: 1,
                 derives: ParticleType::Sand,
-                randomness: 20,
+                randomness: 50,
             },
         },
         Particle {
-            color: 0xfcabab,
+            color: 0xf98257,
             properties: ParticleProperties {
                 name: Some("brick".to_string()),
                 mass: 1,
                 derives: ParticleType::Basic,
+                randomness: 20,
+            },
+        },
+        Particle {
+            color: 0x828282,
+            properties: ParticleProperties {
+                name: Some("block".to_string()),
+                mass: 1,
+                derives: ParticleType::Still,
+                randomness: 20,
+            },
+        },
+        Particle {
+            color: 0x1b55f7,
+            properties: ParticleProperties {
+                name: Some("block".to_string()),
+                mass: 1,
+                derives: ParticleType::Water,
                 randomness: 20,
             },
         }
