@@ -2,25 +2,29 @@ pub fn particles() -> Vec<Particle> {
     let particles = vec![
         Particle {
             color: 11122,
-            properties: Some(ParticleProperties {
-                name: String::from(""),
+            properties: ParticleProperties {
+                name: None,
                 mass: 1,
                 derives: ParticleType::Sand,
                 randomness: 20,
-            }),
+            },
         },
         Particle {
             color: 99992,
-            properties: Some(ParticleProperties::default()),
+            properties: ParticleProperties::default(),
         },
         Particle {
             color: 556600,
-            properties: Some(ParticleProperties::default()),
+            properties: ParticleProperties::default(),
         },
         Particle {
             color: 22222,
-            properties: Some(ParticleProperties::default()),
+            properties: ParticleProperties::default(),
         },
+        Particle {
+            color: 0xfce09f,
+            properties: ParticleProperties::default(),
+        }
     ];
     particles
 }
@@ -36,7 +40,7 @@ pub enum ParticleType {
 
 #[derive(Default, Clone, Debug)]
 pub struct ParticleProperties {
-    pub name: String,
+    pub name: Option<String>,
     pub mass: u32,
     pub derives: ParticleType,
     pub randomness: u32,
@@ -45,5 +49,5 @@ pub struct ParticleProperties {
 #[derive(Default, Clone, Debug)]
 pub struct Particle {
     pub color: u32,
-    pub properties: Option<ParticleProperties>,
+    pub properties: ParticleProperties,
 }

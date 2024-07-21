@@ -35,7 +35,7 @@ impl Ui {
                         y: 10,
                     },
                     focused: false,
-                    focused_color: 999999 - particle.color,
+                    focused_color: particle.color >> 1,
                     default_color: particle.color,
                 };
                 buttons.push(btn);
@@ -45,6 +45,8 @@ impl Ui {
     }
     pub fn step(&mut self, gfx: &mut Graphics, world: &mut World) {
         self.focused = false;
+
+        // update buttons
         if let Some(buttons) = &mut self.buttons {
             for (i, btn) in buttons.iter_mut().enumerate() {
                 if let Some(mouse_pos) = gfx.window.get_mouse_pos(minifb::MouseMode::Discard) {
