@@ -9,6 +9,8 @@ impl Ui {
         Self { ui_focused: false }
     }
     pub fn draw(&mut self, gfx: &mut Graphics) {
+        self.ui_focused = false;
+
         let particles = vec![
             Particle { color: 11122 },
             Particle { color: 99992 },
@@ -18,7 +20,6 @@ impl Ui {
 
         let mut buttons: Vec<Rectangle> = vec![];
 
-        println!("{:?}", self.ui_focused);
         for (i, particle) in particles.iter().enumerate() {
             let rect = Rectangle {
                 color: particle.color,
@@ -39,9 +40,7 @@ impl Ui {
                     && mouse_pos.1 < rect.y as f32 + rect.height as f32
                 {
                     self.ui_focused = true;
-                    rect.color = (999999 - (rect.color) ) as u32;
-                } else {
-                    self.ui_focused = false;
+                    rect.color = 999999 - rect.color;
                 }
             }
         }
@@ -49,5 +48,6 @@ impl Ui {
         for rect in buttons {
             gfx.rectangle(rect);
         }
+        println!("{:?}", self.ui_focused);
     }
 }
