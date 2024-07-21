@@ -1,4 +1,4 @@
-use crate::misc::Particle;
+use crate::particle::Particle;
 
 pub struct World {
     pub particles: Vec<Vec<Option<Particle>>>,

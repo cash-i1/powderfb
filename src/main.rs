@@ -1,11 +1,13 @@
 pub mod graphics;
 pub mod misc;
+pub mod particle;
 pub mod ui;
 pub mod world;
 
 use graphics::*;
 use minifb::*;
-use misc::{Particle, Rectangle};
+use misc::Rectangle;
+use particle::Particle;
 use ui::*;
 use world::*;
 

@@ -11,7 +11,4 @@ pub struct Rectangle {
     pub color: u32,
 }
 
-#[derive(Default, Clone, Debug)]
-pub struct Particle {
-    pub color: u32
-}
+
