@@ -6,6 +6,7 @@ pub fn particles() -> Vec<Particle> {
                 name: String::from(""),
                 mass: 1,
                 derives: ParticleType::Sand,
+                randomness: 20,
             }),
         },
         Particle {
@@ -38,6 +39,7 @@ pub struct ParticleProperties {
     pub name: String,
     pub mass: u32,
     pub derives: ParticleType,
+    pub randomness: u32,
 }
 
 #[derive(Default, Clone, Debug)]

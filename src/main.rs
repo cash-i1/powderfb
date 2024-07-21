@@ -1,14 +1,15 @@
 pub mod graphics;
 pub mod misc;
 pub mod particle;
+pub mod simulate;
 pub mod ui;
 pub mod world;
-pub mod simulate;
 
 use graphics::*;
 use minifb::*;
 use misc::Rectangle;
 use particle::{Particle, ParticleProperties};
+use rand::Rng;
 use ui::*;
 use world::*;
 
@@ -41,7 +42,15 @@ fn main() {
                     gfx.window.set_cursor_style(CursorStyle::Crosshair);
                     let pos = (x as usize / cell_size, y as usize / cell_size);
 
-                    if let Some(particle) = world.selected_particle.clone() {
+                    if let Some(mut particle) = world.selected_particle.clone() {
+                        if let Some(properties) = &particle.properties {
+                            if properties.randomness != 0 {
+                                particle.color -=
+                                    rand::thread_rng().gen_range(1..properties.randomness);
+                                particle.color +=
+                                    rand::thread_rng().gen_range(1..properties.randomness);
+                            }
+                        }
                         world.particles[pos.0][pos.1] = Some(particle);
                     } else {
                         world.particles[pos.0][pos.1] = Some(Particle {
@@ -65,6 +74,7 @@ fn main() {
                         height: world.cell_height,
                         color: p.color,
                     };
+
                     gfx.rectangle(rect);
                 }
             }
