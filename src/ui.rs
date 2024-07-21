@@ -5,14 +5,14 @@ use crate::particle::PARTICLES;
 use crate::World;
 
 pub struct Ui {
-    pub ui_focused: bool,
+    pub focused: bool,
 }
 impl Ui {
     pub fn new() -> Self {
-        Self { ui_focused: false }
+        Self { focused: false }
     }
     pub fn draw(&mut self, gfx: &mut Graphics, world: &mut World) {
-        self.ui_focused = false;
+        self.focused = false;
 
         let mut buttons: Vec<Rectangle> = vec![];
 
@@ -35,7 +35,7 @@ impl Ui {
                     && mouse_pos.1 > rect.y as f32
                     && mouse_pos.1 < rect.y as f32 + rect.height as f32
                 {
-                    self.ui_focused = true;
+                    self.focused = true;
                     rect.color = 999999 - rect.color;
                     if gfx.window.get_mouse_down(minifb::MouseButton::Left) {
                         world.selected_particle = Some(PARTICLES[i].clone()).clone();
