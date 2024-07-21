@@ -32,9 +32,9 @@ impl Simulate {
                 world.particles[i][j + 1] = Some(particle);
             } else if i.checked_sub(1).unwrap_or(0) < world.particles.len()
                 && j + 1 < world.particles[i].len()
-                && world.particles[i - 1][j+1].is_none()
+                && world.particles[i.checked_sub(1).unwrap_or(0)][j+1].is_none()
             {
-                world.particles[i - 1][j + 1] = Some(particle);
+                world.particles[i.checked_sub(1).unwrap_or(0)][j + 1] = Some(particle);
             } else if i + 1 < world.particles.len()
                 && j + 1 < world.particles[i].len()
                 && world.particles[i + 1][j+1].is_none()
