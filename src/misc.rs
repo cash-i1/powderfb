@@ -12,4 +12,11 @@ pub struct Rectangle {
     pub color: u32,
 }
 
+pub fn error(text: &str) {
+    eprint!("error: {text}");
+    std::process::exit(1);
+}
 
+pub fn warning(text: &str) {
+    eprint!("warning: {text}");
+}
