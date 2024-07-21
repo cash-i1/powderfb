@@ -1,29 +1,22 @@
 pub fn particles() -> Vec<Particle> {
     let particles = vec![
         Particle {
-            color: 11122,
+            color: 0xfce09f,
             properties: ParticleProperties {
-                name: None,
+                name: Some("sand".to_string()),
                 mass: 1,
                 derives: ParticleType::Sand,
                 randomness: 20,
             },
         },
         Particle {
-            color: 99992,
-            properties: ParticleProperties::default(),
-        },
-        Particle {
-            color: 556600,
-            properties: ParticleProperties::default(),
-        },
-        Particle {
-            color: 22222,
-            properties: ParticleProperties::default(),
-        },
-        Particle {
-            color: 0xfce09f,
-            properties: ParticleProperties::default(),
+            color: 0xfcabab,
+            properties: ParticleProperties {
+                name: Some("brick".to_string()),
+                mass: 1,
+                derives: ParticleType::Basic,
+                randomness: 20,
+            },
         }
     ];
     particles
