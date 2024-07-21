@@ -31,6 +31,7 @@ fn main() {
     );
 
     let mut ui = Ui::new();
+    ui.init();
 
     while gfx.window.is_open() {
         if ui.focused == false {
@@ -68,7 +69,8 @@ fn main() {
         }
         world.step();
         {
-            ui.draw(&mut gfx, &mut world);
+            ui.step(&mut gfx, &mut world);
+            ui.draw(&mut gfx);
         }
         gfx.update();
     }
