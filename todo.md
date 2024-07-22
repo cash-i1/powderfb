@@ -1,11 +1,12 @@
 # bugs
-- [ ] fix water crashing game when going off the left side
-- [ ] fix water physics being shit
+- [x] fix water crashing game when going off the left side
+- [x] fix water physics being shit
     - water goes left
     - water also doesn't settle flat and looks lumpy
-- [ ] make water and sand simulation code less messy
+- [ ] water jitters around
+- [x] make water and sand simulation code less messy
 - [ ] particles phasing through things
-- [ ] make sand physics less liquid-like
+- [x] make sand physics less liquid-like
 - [ ] fix placing particles on left and right of world makes them not have physics
 
 # features

@@ -1,3 +1,5 @@
+use rand::Rng;
+
 use crate::{misc::error, particle::ParticleType, World};
 
 pub struct Simulate {}
@@ -26,6 +28,12 @@ impl Simulate {
     }
     pub fn sand(world: &mut World, (i, j): (usize, usize)) {
         if let Some(particle) = world.particles[i][j].take() {
+            let rand_i = i.wrapping_add(if rand::random::<bool>() {
+                1
+            } else {
+                usize::MAX
+            });
+
             if j.checked_add(1).is_some()
                 && i.checked_sub(1).is_some()
                 && i.checked_add(1).is_some()
@@ -36,10 +44,8 @@ impl Simulate {
                     world.particles[i][j] = Some(particle);
                 } else if world.particles[i][j + 1].is_none() {
                     world.particles[i][j + 1] = Some(particle);
-                } else if world.particles[i - 1][j + 1].is_none() {
-                    world.particles[i - 1][j + 1] = Some(particle);
-                } else if world.particles[i + 1][j + 1].is_none() {
-                    world.particles[i + 1][j + 1] = Some(particle);
+                } else if world.particles[rand_i][j + 1].is_none() {
+                    world.particles[rand_i][j + 1] = Some(particle);
                 } else {
                     world.particles[i][j] = Some(particle);
                 }
@@ -50,6 +56,12 @@ impl Simulate {
     }
     pub fn water(world: &mut World, (i, j): (usize, usize)) {
         if let Some(particle) = world.particles[i][j].take() {
+            let rand_i = i.wrapping_add(if rand::random::<bool>() {
+                1
+            } else {
+                usize::MAX
+            });
+
             if j.checked_add(1).is_some()
                 && i.checked_sub(1).is_some()
                 && i.checked_add(1).is_some()
@@ -60,14 +72,10 @@ impl Simulate {
                     world.particles[i][j] = Some(particle);
                 } else if world.particles[i][j + 1].is_none() {
                     world.particles[i][j + 1] = Some(particle);
-                } else if world.particles[i - 1][j + 1].is_none() {
-                    world.particles[i - 1][j + 1] = Some(particle);
-                } else if world.particles[i + 1][j + 1].is_none() {
-                    world.particles[i + 1][j + 1] = Some(particle);
-                } else if world.particles[i - 1][j].is_none() {
-                    world.particles[i - 1][j] = Some(particle);
-                } else if world.particles[i + 1][j].is_none() {
-                    world.particles[i + 1][j] = Some(particle);
+                } else if world.particles[rand_i][j + 1].is_none() {
+                    world.particles[rand_i][j + 1] = Some(particle);
+                } else if world.particles[rand_i][j].is_none() {
+                    world.particles[rand_i][j] = Some(particle);
                 } else {
                     world.particles[i][j] = Some(particle);
                 }
