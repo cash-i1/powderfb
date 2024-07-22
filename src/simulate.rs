@@ -26,48 +26,54 @@ impl Simulate {
     }
     pub fn sand(world: &mut World, (i, j): (usize, usize)) {
         if let Some(particle) = world.particles[i][j].take() {
-            if j + 1 < world.particles[i].len() && world.particles[i][j + 1].is_none() {
-                world.particles[i][j + 1] = Some(particle);
-            } else if i.checked_sub(1).unwrap_or(0) < world.particles.len()
+            if j.checked_add(1).is_some()
+                && i.checked_sub(1).is_some()
+                && i.checked_add(1).is_some()
                 && j + 1 < world.particles[i].len()
-                && world.particles[i.checked_sub(1).unwrap_or(0)][j + 1].is_none()
+                && i + 1 < world.particles.len()
             {
-                world.particles[i.checked_sub(1).unwrap_or(0)][j + 1] = Some(particle);
-            } else if i + 1 < world.particles.len()
-                && j + 1 < world.particles[i].len()
-                && world.particles[i + 1][j + 1].is_none()
-            {
-                world.particles[i + 1][j + 1] = Some(particle);
+                if j == world.particles[i].len() {
+                    world.particles[i][j] = Some(particle);
+                } else if world.particles[i][j + 1].is_none() {
+                    world.particles[i][j + 1] = Some(particle);
+                } else if world.particles[i - 1][j + 1].is_none() {
+                    world.particles[i - 1][j + 1] = Some(particle);
+                } else if world.particles[i + 1][j + 1].is_none() {
+                    world.particles[i + 1][j + 1] = Some(particle);
+                } else {
+                    world.particles[i][j] = Some(particle);
+                }
             } else {
                 world.particles[i][j] = Some(particle);
             }
-        } else {
-            world.particles[i][j] = None;
         }
     }
     pub fn water(world: &mut World, (i, j): (usize, usize)) {
         if let Some(particle) = world.particles[i][j].take() {
-            if j + 1 < world.particles[i].len() && world.particles[i][j + 1].is_none() {
-                world.particles[i][j + 1] = Some(particle);
-            } else if i.checked_sub(1).unwrap_or(0) < world.particles.len()
+            if j.checked_add(1).is_some()
+                && i.checked_sub(1).is_some()
+                && i.checked_add(1).is_some()
                 && j + 1 < world.particles[i].len()
-                && world.particles[i.checked_sub(1).unwrap_or(0)][j + 1].is_none()
+                && i + 1 < world.particles.len()
             {
-                world.particles[i.checked_sub(1).unwrap_or(0)][j + 1] = Some(particle);
-            } else if i + 1 < world.particles.len()
-                && j + 1 < world.particles[i].len()
-                && world.particles[i + 1][j + 1].is_none()
-            {
-                world.particles[i + 1][j + 1] = Some(particle);
-            } else if i + 1 < world.particles.len() && world.particles[i - 1][j].is_none() {
-                world.particles[i - 1][j] = Some(particle);
-            } else if i + 1 < world.particles.len() && world.particles[i + 1][j].is_none() {
-                world.particles[i + 1][j] = Some(particle);
+                if j == world.particles[i].len() {
+                    world.particles[i][j] = Some(particle);
+                } else if world.particles[i][j + 1].is_none() {
+                    world.particles[i][j + 1] = Some(particle);
+                } else if world.particles[i - 1][j + 1].is_none() {
+                    world.particles[i - 1][j + 1] = Some(particle);
+                } else if world.particles[i + 1][j + 1].is_none() {
+                    world.particles[i + 1][j + 1] = Some(particle);
+                } else if world.particles[i - 1][j].is_none() {
+                    world.particles[i - 1][j] = Some(particle);
+                } else if world.particles[i + 1][j].is_none() {
+                    world.particles[i + 1][j] = Some(particle);
+                } else {
+                    world.particles[i][j] = Some(particle);
+                }
             } else {
                 world.particles[i][j] = Some(particle);
             }
-        } else {
-            world.particles[i][j] = None;
         }
     }
 }

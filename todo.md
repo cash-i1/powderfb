@@ -1,10 +1,12 @@
 # bugs
-- [ ] fix water breaking when going off the left side
+- [ ] fix water crashing game when going off the left side
 - [ ] fix water physics being shit
     - water goes left
     - water also doesn't settle flat and looks lumpy
 - [ ] make water and sand simulation code less messy
 - [ ] particles phasing through things
+- [ ] make sand physics less liquid-like
+- [ ] fix placing particles on left and right of world makes them not have physics
 
 # features
 - [ ] add acid
@@ -14,3 +16,6 @@
     - make particle icons more intuative
 - [ ] add resizing
 - [ ] water rusts metal
+- [ ] more dense particles sink into less dense particles
+- [ ] text
+- [ ] add functions for world struct for manipulate particles
