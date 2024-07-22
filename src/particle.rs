@@ -4,7 +4,7 @@ pub fn particles() -> Vec<Particle> {
             color: 0xfce09f,
             properties: ParticleProperties {
                 name: Some("sand".to_string()),
-                mass: 1,
+                density: 10,
                 derives: ParticleType::Sand,
                 randomness: 50,
             },
@@ -13,7 +13,7 @@ pub fn particles() -> Vec<Particle> {
             color: 0xf98257,
             properties: ParticleProperties {
                 name: Some("brick".to_string()),
-                mass: 1,
+                density: 20,
                 derives: ParticleType::Basic,
                 randomness: 20,
             },
@@ -22,7 +22,7 @@ pub fn particles() -> Vec<Particle> {
             color: 0x828282,
             properties: ParticleProperties {
                 name: Some("block".to_string()),
-                mass: 1,
+                density: 100,
                 derives: ParticleType::Still,
                 randomness: 20,
             },
@@ -31,8 +31,17 @@ pub fn particles() -> Vec<Particle> {
             color: 0x1b55f7,
             properties: ParticleProperties {
                 name: Some("water".to_string()),
-                mass: 1,
+                density: 5,
                 derives: ParticleType::Water,
+                randomness: 10,
+            },
+        },
+        Particle {
+            color: 0x44fc1b,
+            properties: ParticleProperties {
+                name: Some("acid".to_string()),
+                density: 5,
+                derives: ParticleType::Acid,
                 randomness: 10,
             },
         }
@@ -40,10 +49,11 @@ pub fn particles() -> Vec<Particle> {
     particles
 }
 
-#[derive(Default, Clone, Debug)]
+#[derive(Default, Clone, Debug, PartialEq, Eq)]
 pub enum ParticleType {
     Still, // does not move
     Sand,
+    Acid,
     Water,
     #[default]
     Basic, // goes down only
@@ -52,7 +62,7 @@ pub enum ParticleType {
 #[derive(Default, Clone, Debug)]
 pub struct ParticleProperties {
     pub name: Option<String>,
-    pub mass: u32,
+    pub density: u32,
     pub derives: ParticleType,
     pub randomness: u32,
 }
