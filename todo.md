@@ -20,3 +20,4 @@
 - [ ] more dense particles sink into less dense particles
 - [ ] text
 - [ ] add functions for world struct for manipulate particles
+- [ ] add 'asleep' to particles so they stop simulating if no one interacts with them

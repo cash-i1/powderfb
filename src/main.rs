@@ -33,7 +33,7 @@ fn main() {
     );
 
     let mut ui = Ui::new();
-    ui.init();
+    ui.init(&gfx);
 
     while gfx.window.is_open() {
         if ui.focused == false {

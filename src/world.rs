@@ -9,6 +9,7 @@ pub struct World {
     pub cell_height: usize,
     pub game_tick: u32,
     pub selected_particle: Option<Particle>,
+    pub paused: bool,
 }
 
 impl World {
@@ -28,9 +29,11 @@ impl World {
             cell_height,
             game_tick: 0,
             selected_particle: None,
+            paused: false,
         }
     }
     pub fn step(&mut self) {
+        if self.paused {return;}
         self.game_tick += 1;
 
         if self.game_tick % 2 == 0 {

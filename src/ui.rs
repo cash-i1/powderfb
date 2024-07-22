@@ -9,6 +9,8 @@ pub struct Button {
     focused: bool,
     focused_color: u32,
     default_color: u32,
+    id: String,
+    toggled: bool,
 }
 
 pub struct Ui {
@@ -22,9 +24,11 @@ impl Ui {
             buttons: None,
         }
     }
-    pub fn init(&mut self) {
+    pub fn init(&mut self, gfx: &Graphics) {
         if self.buttons.is_none() {
             let mut buttons = vec![];
+
+            // particle buttons
             for (i, particle) in particles().iter().enumerate() {
                 let btn = Button {
                     rect: Rectangle {
@@ -37,9 +41,30 @@ impl Ui {
                     focused: false,
                     focused_color: (particle.color & 0xfefefe) >> 1,
                     default_color: particle.color,
+                    id: "select_particle".to_string(),
+                    toggled: false,
                 };
                 buttons.push(btn);
             }
+
+            // option buttons
+            let diagonals = Button {
+                rect: Rectangle {
+                    color: 0x3f3f3f,
+                    height: 15,
+                    width: 15,
+                    x: gfx.window.get_size().0 - 20,
+                    y: 20,
+                },
+                focused: false,
+                focused_color: 0x2f3030,
+                default_color: 0x3f3f3f,
+                id: "toggle_diagonals".to_string(),
+                toggled: false,
+            };
+
+            buttons.push(diagonals);
+
             self.buttons = Some(buttons);
         }
     }
@@ -57,8 +82,15 @@ impl Ui {
                     {
                         self.focused = true;
                         btn.focused = true;
-                        if gfx.window.get_mouse_down(minifb::MouseButton::Left) {
-                            world.selected_particle = Some(particles()[i].clone()).clone();
+                        if btn.id == "select_particle" {
+                            if gfx.window.get_mouse_down(minifb::MouseButton::Left) {
+                                world.selected_particle = Some(particles()[i].clone()).clone();
+                            }
+                        } else if btn.id == "toggle_diagonals" {
+                            if gfx.window.get_mouse_down(minifb::MouseButton::Left) {
+                                btn.toggled = !btn.toggled;
+                                world.paused = btn.toggled;
+                            }
                         }
                     } else {
                         btn.focused = false;
