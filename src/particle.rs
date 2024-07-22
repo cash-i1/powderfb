@@ -30,10 +30,10 @@ pub fn particles() -> Vec<Particle> {
         Particle {
             color: 0x1b55f7,
             properties: ParticleProperties {
-                name: Some("block".to_string()),
+                name: Some("water".to_string()),
                 mass: 1,
                 derives: ParticleType::Water,
-                randomness: 20,
+                randomness: 10,
             },
         }
     ];
