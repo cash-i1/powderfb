@@ -1,5 +1,7 @@
+use crate::misc::Rectangle;
 use crate::particle::Particle;
 use crate::simulate::Simulate;
+use crate::Graphics;
 
 pub struct World {
     pub particles: Vec<Vec<Option<Particle>>>,
@@ -40,6 +42,22 @@ impl World {
             for i in 0..self.particles.len() {
                 for j in (0..self.particles[i].len()).rev() {
                     Simulate::auto(self, (i, j));
+                }
+            }
+        }
+    }
+    pub fn draw(&self, gfx: &mut Graphics) {
+        for (x, i) in self.particles.iter().enumerate() {
+            for (y, particle) in i.iter().enumerate() {
+                if let Some(p) = particle {
+                    let rect = Rectangle {
+                        x: self.cell_width * x,
+                        y: self.cell_height * y,
+                        width: self.cell_width,
+                        height: self.cell_height,
+                        color: p.color,
+                    };
+                    gfx.rectangle(rect);
                 }
             }
         }

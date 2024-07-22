@@ -8,6 +8,7 @@
 - [ ] particles phasing through things
 - [x] make sand physics less liquid-like
 - [ ] fix placing particles on left and right of world makes them not have physics
+- [x] clean up main function
 
 # features
 - [ ] add acid
@@ -21,3 +22,5 @@
 - [ ] text
 - [ ] add functions for world struct for manipulate particles
 - [ ] add 'asleep' to particles so they stop simulating if no one interacts with them
+- [ ] make the ui system good
+    - 'element' trait or something so that there can be buttons and checkboxes etc with differnt look and functionality

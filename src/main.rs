@@ -36,7 +36,7 @@ fn main() {
     ui.init(&gfx);
 
     while gfx.window.is_open() {
-        if ui.focused == false {
+        if !ui.focused {
             if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
                 if gfx.window.get_mouse_down(MouseButton::Left) {
                     gfx.window.set_cursor_style(CursorStyle::Crosshair);
@@ -62,26 +62,12 @@ fn main() {
             }
         }
 
-        for (x, i) in world.particles.iter().enumerate() {
-            for (y, particle) in i.iter().enumerate() {
-                if let Some(p) = particle {
-                    let rect = Rectangle {
-                        x: world.cell_width * x,
-                        y: world.cell_height * y,
-                        width: world.cell_width,
-                        height: world.cell_height,
-                        color: p.color,
-                    };
-
-                    gfx.rectangle(rect);
-                }
-            }
-        }
-        world.step();
         {
+            world.step();
+            world.draw(&mut gfx);
             ui.step(&mut gfx, &mut world);
             ui.draw(&mut gfx);
+            gfx.update();
         }
-        gfx.update();
     }
 }
