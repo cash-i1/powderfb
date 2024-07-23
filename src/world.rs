@@ -1,4 +1,4 @@
-use crate::misc::Rectangle;
+use crate::misc::{pos, Rectangle};
 use crate::particle::Particle;
 use crate::simulate::Simulate;
 use crate::Graphics;
@@ -41,7 +41,7 @@ impl World {
         if self.game_tick % 2 == 0 {
             for i in 0..self.particles.len() {
                 for j in (0..self.particles[i].len()).rev() {
-                    Simulate::auto(self, (i, j));
+                    Simulate::auto(self, pos(i, j));
                 }
             }
         }

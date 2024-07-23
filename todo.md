@@ -31,6 +31,7 @@
     - as its own crate
     - with text rendering
     - with image rendering
+    - with 'render layers' which are just like photoshop layers
 - [ ] remake particle system
 - [x] add color struct
     - [ ] with color manipulation functions

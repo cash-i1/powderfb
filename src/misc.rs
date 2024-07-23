@@ -6,6 +6,28 @@ pub struct WindowDimensions {
     pub height: usize,
 }
 
+pub struct Position {
+    i: usize,
+    j: usize,
+}
+impl Position {
+    pub fn i(&self) -> usize {
+        self.i
+    }
+    pub fn j(&self) -> usize {
+        self.j
+    }
+    pub fn x(&self) -> usize {
+        self.i
+    }
+    pub fn y(&self) -> usize {
+        self.j
+    }
+}
+
+pub fn pos(x: usize, y: usize) -> Position {
+    Position { i: x, j: y }
+}
 #[derive(Clone)]
 pub struct Rectangle {
     pub x: usize,
@@ -44,7 +66,11 @@ impl Color {
     }
     pub fn rgb(r: u8, g: u8, b: u8) -> Self {
         let hex_string = format!("{:X}{:X}{:X}", r, g, b);
-        Color::Custom(u32::from_str_radix(&hex_string, 16).unwrap().clamp(0x000000, 0xffffff))
+        Color::Custom(
+            u32::from_str_radix(&hex_string, 16)
+                .unwrap()
+                .clamp(0x000000, 0xffffff),
+        )
     }
     pub fn raw(&self) -> u32 {
         match self {
