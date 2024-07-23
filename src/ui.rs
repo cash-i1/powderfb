@@ -9,6 +9,7 @@ pub struct Button {
     focused: bool,
     focused_color: u32,
     default_color: u32,
+    current_color: u32,
     id: String,
     toggled: bool,
 }
@@ -32,7 +33,6 @@ impl Ui {
             for (i, particle) in particles().iter().enumerate() {
                 let btn = Button {
                     rect: Rectangle {
-                        color: particle.color,
                         height: 35,
                         width: 35,
                         x: 10 + 50 * i,
@@ -41,6 +41,7 @@ impl Ui {
                     focused: false,
                     focused_color: (particle.color & 0xfefefe) >> 1,
                     default_color: particle.color,
+                    current_color: particle.color,
                     id: "select_particle".to_string(),
                     toggled: false,
                 };
@@ -50,7 +51,6 @@ impl Ui {
             // option buttons
             let diagonals = Button {
                 rect: Rectangle {
-                    color: 0x3f3f3f,
                     height: 15,
                     width: 15,
                     x: gfx.window.get_size().0 - 20,
@@ -59,6 +59,7 @@ impl Ui {
                 focused: false,
                 focused_color: 0x2f3030,
                 default_color: 0x3f3f3f,
+                current_color: 0x3f3f3f,
                 id: "toggle_diagonals".to_string(),
                 toggled: false,
             };
@@ -103,11 +104,11 @@ impl Ui {
         if let Some(buttons) = &mut self.buttons {
             for btn in buttons {
                 if btn.focused {
-                    btn.rect.color = btn.focused_color;
+                    btn.current_color = btn.focused_color;
                 } else {
-                    btn.rect.color = btn.default_color;
+                    btn.current_color = btn.default_color;
                 }
-                gfx.rectangle(btn.rect.clone());
+                gfx.rectangle(btn.rect.clone(), btn.current_color);
             }
         }
     }

@@ -9,7 +9,6 @@ pub struct Rectangle {
     pub y: usize,
     pub width: usize,
     pub height: usize,
-    pub color: u32,
 }
 
 pub fn error(text: &str) {

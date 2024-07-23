@@ -11,7 +11,7 @@
 - [x] clean up main function
 
 # features
-- [ ] add acid
+- [x] add acid
 - [ ] make drawing particles better (no gaps in stroke)
 - [ ] add deselecting particles
 - [ ] improve ui
@@ -19,8 +19,15 @@
 - [ ] add resizing
 - [ ] water rusts metal
 - [ ] more dense particles sink into less dense particles
+- [ ] add 'asleep' to particles so they stop simulating if no one interacts with them
+
+# improvements
 - [ ] text
 - [ ] add functions for world struct for manipulate particles
-- [ ] add 'asleep' to particles so they stop simulating if no one interacts with them
 - [ ] make the ui system good
     - 'element' trait or something so that there can be buttons and checkboxes etc with differnt look and functionality
+- [ ] remake graphics
+    - as its own crate
+    - with text rendering
+    - with image rendering
+- [ ] remake particle system

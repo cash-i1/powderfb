@@ -55,9 +55,8 @@ impl World {
                         y: self.cell_height * y,
                         width: self.cell_width,
                         height: self.cell_height,
-                        color: p.color,
                     };
-                    gfx.rectangle(rect);
+                    gfx.rectangle(rect, p.color);
                 }
             }
         }
