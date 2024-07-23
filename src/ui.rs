@@ -1,4 +1,5 @@
 use crate::graphics::Graphics;
+use crate::misc::Color;
 use crate::misc::Rectangle;
 use crate::particle::particles;
 use crate::particle::Particle;
@@ -7,9 +8,9 @@ use crate::World;
 pub struct Button {
     rect: Rectangle,
     focused: bool,
-    focused_color: u32,
-    default_color: u32,
-    current_color: u32,
+    focused_color: Color,
+    default_color: Color,
+    current_color: Color,
     id: String,
     toggled: bool,
 }
@@ -39,7 +40,7 @@ impl Ui {
                         y: 10,
                     },
                     focused: false,
-                    focused_color: (particle.color & 0xfefefe) >> 1,
+                    focused_color: Color::Custom((particle.color.raw() & 0xfefefe) >> 1),
                     default_color: particle.color,
                     current_color: particle.color,
                     id: "select_particle".to_string(),
@@ -57,9 +58,9 @@ impl Ui {
                     y: 20,
                 },
                 focused: false,
-                focused_color: 0x2f3030,
-                default_color: 0x3f3f3f,
-                current_color: 0x3f3f3f,
+                focused_color: Color::Custom(0x2f3030),
+                default_color: Color::Custom(0x3f3f3f),
+                current_color: Color::Custom(0x3f3f3f),
                 id: "toggle_diagonals".to_string(),
                 toggled: false,
             };

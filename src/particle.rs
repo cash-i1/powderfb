@@ -1,7 +1,9 @@
+use crate::misc::Color;
+
 pub fn particles() -> Vec<Particle> {
     let particles = vec![
         Particle {
-            color: 0xfce09f,
+            color: Color::Custom(0xfce09f),
             properties: ParticleProperties {
                 name: Some("sand".to_string()),
                 density: 10,
@@ -10,7 +12,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
-            color: 0xf98257,
+            color: Color::Custom(0xf98257),
             properties: ParticleProperties {
                 name: Some("brick".to_string()),
                 density: 20,
@@ -19,7 +21,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
-            color: 0x828282,
+            color: Color::Custom(0x828282),
             properties: ParticleProperties {
                 name: Some("block".to_string()),
                 density: 100,
@@ -28,7 +30,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
-            color: 0x1b55f7,
+            color: Color::Custom(0x1b55f7),
             properties: ParticleProperties {
                 name: Some("water".to_string()),
                 density: 5,
@@ -37,7 +39,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
-            color: 0x44fc1b,
+            color: Color::Custom(0x44fc1b),
             properties: ParticleProperties {
                 name: Some("acid".to_string()),
                 density: 5,
@@ -69,6 +71,6 @@ pub struct ParticleProperties {
 
 #[derive(Default, Clone, Debug)]
 pub struct Particle {
-    pub color: u32,
+    pub color: Color,
     pub properties: ParticleProperties,
 }

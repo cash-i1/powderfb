@@ -1,4 +1,4 @@
-use crate::misc::{Rectangle, WindowDimensions};
+use crate::misc::{Color, Rectangle, WindowDimensions};
 use minifb::*;
 
 pub struct Graphics {
@@ -11,20 +11,20 @@ impl Graphics {
     pub fn builder() -> GraphicsBuilder {
         GraphicsBuilder::new()
     }
-    pub fn rectangle(&mut self, rect: Rectangle, color: u32) {
+    pub fn rectangle(&mut self, rect: Rectangle, color: Color) {
         for i in 0..rect.width {
             for j in 0..rect.height {
                 let (new_x, new_y) = (i + rect.x, j + rect.y);
                 let new = new_y * self.dimensions.width + new_x;
                 if let Some(buf) = self.buffer.get_mut(new) {
-                    *buf = color;
+                    *buf = color.raw();
                 }
             }
         }
     }
 
-    pub fn pixel(&mut self, rect: Rectangle, color: u32) {
-        self.buffer[rect.y * self.dimensions.width + rect.x] = color;
+    pub fn pixel(&mut self, rect: Rectangle, color: Color) {
+        self.buffer[rect.y * self.dimensions.width + rect.x] = color.raw();
     }
     pub fn update(&mut self) {
         self.window
