@@ -47,7 +47,6 @@ fn main() {
                     if let Some(mut particle) = world.selected_particle.clone() {
                         if particle.properties.randomness != 0 {
                             particle.color.variate(particle.properties.randomness);
-                            println!("{:X?}", particle.color);
                         }
                         world.particles[pos.0][pos.1] = Some(particle);
                     } else {
