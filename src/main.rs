@@ -13,6 +13,8 @@ use rand::Rng;
 use ui::*;
 use world::*;
 
+use crate::misc::Color;
+
 fn main() {
     let screen_width = 1280;
     let screen_height = 720;
