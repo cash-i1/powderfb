@@ -6,7 +6,7 @@ use crate::World;
 
 pub mod components;
 
-use components::button::ChooseParticleButton;
+use components::particle_button::ParticleButton;
 
 pub trait UiObject {
     fn init(&mut self, ui: &mut Ui);
@@ -29,7 +29,7 @@ impl Ui {
     }
     pub fn init(&mut self, gfx: &Graphics) {
         for (i, particle) in particles().iter().enumerate() {
-            let mut btn = ChooseParticleButton::new(particle, i);
+            let mut btn = ParticleButton::new(particle, i);
             btn.init(self);
             self.objects.push(btn);
         }

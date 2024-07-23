@@ -9,6 +9,7 @@
 - [x] make sand physics less liquid-like
 - [ ] fix placing particles on left and right of world makes them not have physics
 - [x] clean up main function
+- [ ] clicking on a particle button spawns a particle apart from the last button
 
 # features
 - [x] add acid
@@ -24,7 +25,7 @@
 # improvements
 - [ ] text
 - [ ] add functions for world struct for manipulate particles
-- [ ] make the ui system good
+- [x] make the ui system good
     - 'element' trait or something so that there can be buttons and checkboxes etc with differnt look and functionality
 - [ ] remake graphics
     - as its own crate

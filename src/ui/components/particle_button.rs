@@ -7,7 +7,7 @@ use crate::ui::UiObject;
 use crate::Ui;
 use crate::World;
 
-pub struct ChooseParticleButton {
+pub struct ParticleButton {
     pub rect: Rectangle,
     pub focused: bool,
     pub focused_color: Color,
@@ -16,9 +16,9 @@ pub struct ChooseParticleButton {
     pub particle_index: usize,
 }
 
-impl ChooseParticleButton {
+impl ParticleButton {
     pub fn new(particle: &Particle, i: usize) -> Box<dyn UiObject> {
-        let btn = ChooseParticleButton {
+        let btn = ParticleButton {
             rect: Rectangle {
                 height: 35,
                 width: 35,
@@ -35,7 +35,7 @@ impl ChooseParticleButton {
     }
 }
 
-impl UiObject for ChooseParticleButton {
+impl UiObject for ParticleButton {
     fn rect(&self) -> Rectangle {
         self.rect.clone()
     }
