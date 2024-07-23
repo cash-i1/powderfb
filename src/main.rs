@@ -46,11 +46,8 @@ fn main() {
 
                     if let Some(mut particle) = world.selected_particle.clone() {
                         if particle.properties.randomness != 0 {
-                            particle.color -=
-                                Color::Custom(rand::thread_rng().gen_range(1..particle.properties.randomness));
-                            particle.color +=
-                                Color::Custom(rand::thread_rng().gen_range(1..particle.properties.randomness));
-                            println!("{:?}", particle.color);
+                            particle.color.variate(particle.properties.randomness);
+                            println!("{:X?}", particle.color);
                         }
                         world.particles[pos.0][pos.1] = Some(particle);
                     } else {

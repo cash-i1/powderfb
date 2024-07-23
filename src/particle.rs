@@ -8,7 +8,7 @@ pub fn particles() -> Vec<Particle> {
                 name: Some("sand".to_string()),
                 density: 10,
                 derives: ParticleType::Sand,
-                randomness: 50,
+                randomness: 20,
             },
         },
         Particle {
@@ -17,7 +17,7 @@ pub fn particles() -> Vec<Particle> {
                 name: Some("brick".to_string()),
                 density: 20,
                 derives: ParticleType::Basic,
-                randomness: 20,
+                randomness: 0,
             },
         },
         Particle {
@@ -26,7 +26,7 @@ pub fn particles() -> Vec<Particle> {
                 name: Some("block".to_string()),
                 density: 100,
                 derives: ParticleType::Still,
-                randomness: 20,
+                randomness: 10,
             },
         },
         Particle {
@@ -35,7 +35,7 @@ pub fn particles() -> Vec<Particle> {
                 name: Some("water".to_string()),
                 density: 5,
                 derives: ParticleType::Water,
-                randomness: 10,
+                randomness: 8,
             },
         },
         Particle {

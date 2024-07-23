@@ -44,19 +44,29 @@ impl Color {
     }
     pub fn rgb(r: u8, g: u8, b: u8) -> Self {
         let hex_string = format!("{:X}{:X}{:X}", r, g, b);
-        Color::Custom(u32::from_str_radix(&hex_string, 16).unwrap())
+        Color::Custom(u32::from_str_radix(&hex_string, 16).unwrap().clamp(0x000000, 0xffffff))
     }
     pub fn raw(&self) -> u32 {
         match self {
             Self::None => 0,
-            Self::Custom(col) => *col,
+            Self::Custom(col) => col.clamp(&0x000000, &0xffffff).clone(),
         }
     }
-    pub fn raw_mut(&mut self) -> u32 {
+    pub fn raw_mut(&mut self) -> &mut u32 {
         match self {
-            Self::None => 0,
-            Self::Custom(col) => *col,
+            Self::None => panic!("cant get mutable reference to an empty color"),
+            Self::Custom(col) => col,
         }
+    }
+    pub fn variate(&mut self, variation: u32) {
+        let mut new = self.raw();
+        if rand::random::<bool>() {
+            new -= variation;
+        } else {
+            new += variation;
+        }
+
+        *self.raw_mut() = new.clamp(0x000000, 0xffffff);
     }
 }
 

@@ -31,5 +31,5 @@
     - with text rendering
     - with image rendering
 - [ ] remake particle system
-- [ ] add color struct
+- [x] add color struct
     - [ ] with color manipulation functions
