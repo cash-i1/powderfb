@@ -35,3 +35,4 @@
 - [ ] remake particle system
 - [x] add color struct
     - [ ] with color manipulation functions
+- [x] added position struct

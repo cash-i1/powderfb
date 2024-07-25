@@ -1,4 +1,4 @@
-use crate::misc::{pos, Rectangle};
+use crate::misc::{pos, Direction, Position, Rectangle};
 use crate::particle::Particle;
 use crate::simulate::Simulate;
 use crate::Graphics;
@@ -35,7 +35,9 @@ impl World {
         }
     }
     pub fn step(&mut self) {
-        if self.paused {return;}
+        if self.paused {
+            return;
+        }
         self.game_tick += 1;
 
         if self.game_tick % 2 == 0 {
@@ -60,5 +62,26 @@ impl World {
                 }
             }
         }
+    }
+
+    pub fn can_move(&self, direction: Direction) -> bool {
+        todo!()
+    }
+    pub fn move_to(&mut self, p1: Position, p2: Position) {}
+    pub fn swap(&mut self, p1: Position, p2: Position) {}
+    pub fn take(&mut self, p: Position) -> Option<Particle> {
+        todo!()
+    }
+    pub fn is_empty(&self, p: Position) -> bool {
+        if let Some(_) = self.particles.get(p.i()) {
+            if let Some(_) = self.particles[p.i()].get(p.j()) {
+                if self.particles[p.i()][p.j()].is_none() {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        false
     }
 }

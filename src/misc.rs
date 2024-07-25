@@ -138,3 +138,11 @@ impl ops::SubAssign<Color> for Color {
         *self = self.clone() + rhs
     }
 }
+
+pub enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+    Custom(usize),
+}

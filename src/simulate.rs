@@ -13,9 +13,9 @@ impl Simulate {
             match particle.properties.derives {
                 ParticleType::Basic => Self::basic(world, pos),
                 ParticleType::Sand => Self::sand(world, pos),
-                ParticleType::Still => {}
                 ParticleType::Water => Self::water(world, pos),
                 ParticleType::Acid => Self::acid(world, pos),
+                ParticleType::Still => {}
             }
         }
     }
