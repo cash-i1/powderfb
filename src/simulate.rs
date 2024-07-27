@@ -15,7 +15,7 @@ impl Simulate {
                 ParticleType::Basic => Self::basic(world, pos),
                 ParticleType::Sand => Self::sand(world, pos),
                 ParticleType::Water => Self::water(world, pos),
-                ParticleType::Acid => Self::water(world, pos),
+                ParticleType::Acid => Self::acid(world, pos),
                 ParticleType::Still => {}
             }
         }
@@ -54,6 +54,30 @@ impl Simulate {
             }),
         );
         world.try_move(
+            pos,
+            pos.modify(|p| {
+                *p.i_mut() = rand_i;
+                *p.j_mut() += 1
+            }),
+        );
+    }
+    pub fn acid(world: &mut World, pos: Position) {
+        let rand_i = pos.i().wrapping_add(if rand::random::<bool>() {
+            1
+        } else {
+            usize::MAX
+        });
+
+        world.try_replace(pos, pos.modify(|p| *p.j_mut() += 1));
+        if let Some(new_pos) = world.try_replace(
+            pos,
+            pos.modify(|p| {
+                *p.i_mut() = rand_i;
+            }),
+        ) {
+            world.remove(new_pos);
+        }
+        world.try_replace(
             pos,
             pos.modify(|p| {
                 *p.i_mut() = rand_i;

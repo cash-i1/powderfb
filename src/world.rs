@@ -1,5 +1,5 @@
 use crate::misc::{pos, Direction, Position, Rectangle};
-use crate::particle::Particle;
+use crate::particle::{Particle, ParticleType};
 use crate::simulate::Simulate;
 use crate::Graphics;
 
@@ -91,6 +91,24 @@ impl World {
             }
         }
     }
+    /// particle at `position1` is moved to `position2`, even if `position2` has a particle there already
+    /// returns the new position if successful or returns None if not successful
+    pub fn try_replace(&mut self, position1: Position, position2: Position) -> Option<Position> {
+        if let Some(particle) = self.take(position1) {
+            if self.is_valid(position2) {
+                self.set(position2, particle);
+                return Some(position2.clone());
+            } else {
+                self.set(position1, particle);
+                return None;
+            }
+        } else {
+            return None;
+        }
+    }
+    pub fn is_valid(&self, position: Position) -> bool {
+        position.i() < self.particles.len() && position.j() < self.particles[position.i()].len()
+    }
     pub fn take(&mut self, position: Position) -> Option<Particle> {
         self.particles[position.i()][position.j()].take()
     }
@@ -115,13 +133,18 @@ impl World {
     pub fn is_available(&self, position: Position) -> bool {
         if position.i() < self.particles.len() && position.j() < self.particles[position.i()].len()
         {
-            if self.particles[position.i() as usize][position.j() as usize].is_none() {
-                return true;
-            } else {
+            if let Some(_particle) = &self.particles[position.i()][position.j()] {
                 return false;
+            } else {
+                return true;
             }
         } else {
             return false;
+        }
+    }
+    pub fn remove(&mut self, position: Position) {
+        if self.is_valid(position) {
+            self.particles[position.i()][position.j()] = None;
         }
     }
 }
