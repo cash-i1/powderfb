@@ -7,7 +7,7 @@ pub mod world;
 
 use graphics::*;
 use minifb::*;
-use misc::Rectangle;
+use misc::{pos, Position, Rectangle};
 use particle::{Particle, ParticleProperties};
 use rand::Rng;
 use ui::*;
@@ -54,6 +54,12 @@ fn main() {
                             color: Color::random(),
                             properties: ParticleProperties::default(),
                         });
+                    }
+                } 
+                if gfx.window.get_mouse_down(MouseButton::Right) {
+                    let pos = pos(x as usize / cell_size, y as usize / cell_size);
+                    if world.take(pos).is_some() {
+                        world.remove(pos)
                     }
                 } else {
                     gfx.window.set_cursor_style(CursorStyle::Arrow);
