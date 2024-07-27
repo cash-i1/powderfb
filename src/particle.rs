@@ -3,6 +3,7 @@ use crate::misc::Color;
 pub fn particles() -> Vec<Particle> {
     let particles = vec![
         Particle {
+            asleep: false,
             color: Color::Custom(0xfce09f),
             properties: ParticleProperties {
                 name: Some("sand".to_string()),
@@ -12,6 +13,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
+            asleep: false,
             color: Color::Custom(0xf98257),
             properties: ParticleProperties {
                 name: Some("brick".to_string()),
@@ -21,6 +23,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
+            asleep: false,
             color: Color::Custom(0x828282),
             properties: ParticleProperties {
                 name: Some("block".to_string()),
@@ -30,6 +33,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
+            asleep: false,
             color: Color::Custom(0x1b55f7),
             properties: ParticleProperties {
                 name: Some("water".to_string()),
@@ -39,6 +43,7 @@ pub fn particles() -> Vec<Particle> {
             },
         },
         Particle {
+            asleep: false,
             color: Color::Custom(0x44fc1b),
             properties: ParticleProperties {
                 name: Some("acid".to_string()),
@@ -73,4 +78,5 @@ pub struct ParticleProperties {
 pub struct Particle {
     pub color: Color,
     pub properties: ParticleProperties,
+    pub asleep: bool,
 }

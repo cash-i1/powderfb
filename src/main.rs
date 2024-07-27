@@ -40,24 +40,20 @@ fn main() {
     while gfx.window.is_open() {
         if !ui.focused() {
             if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
+                let pos = pos(x as usize / cell_size, y as usize / cell_size);
                 if gfx.window.get_mouse_down(MouseButton::Left) {
                     gfx.window.set_cursor_style(CursorStyle::Crosshair);
-                    let pos = (x as usize / cell_size, y as usize / cell_size);
 
                     if let Some(mut particle) = world.selected_particle.clone() {
                         if particle.properties.randomness != 0 {
                             particle.color.variate(particle.properties.randomness);
                         }
-                        world.particles[pos.0][pos.1] = Some(particle);
-                    } else {
-                        world.particles[pos.0][pos.1] = Some(Particle {
-                            color: Color::random(),
-                            properties: ParticleProperties::default(),
-                        });
+                        world.set(pos, particle);
                     }
-                } 
+                }
                 if gfx.window.get_mouse_down(MouseButton::Right) {
-                    let pos = pos(x as usize / cell_size, y as usize / cell_size);
+                    gfx.window.set_cursor_style(CursorStyle::Crosshair);
+
                     if world.take(pos).is_some() {
                         world.remove(pos)
                     }

@@ -86,6 +86,7 @@ impl World {
         if let Some(particle) = self.take(position1) {
             if self.is_available(position2) {
                 self.set(position2, particle);
+                self.wake_at(position2);
             } else {
                 self.set(position1, particle);
             }
@@ -108,6 +109,10 @@ impl World {
     }
     pub fn is_valid(&self, position: Position) -> bool {
         position.i() < self.particles.len() && position.j() < self.particles[position.i()].len()
+    }
+
+    pub fn wake_at(&self, position: Position) {
+
     }
     pub fn take(&mut self, position: Position) -> Option<Particle> {
         self.particles[position.i()][position.j()].take()
