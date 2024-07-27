@@ -82,9 +82,6 @@ impl World {
             return None;
         }
     }
-    pub fn is_valid(&self, position: Position, direction: Direction) -> bool {
-        todo!()
-    }
     pub fn try_move(&mut self, position1: Position, position2: Position) {
         if let Some(particle) = self.take(position1) {
             if self.is_available(position2) {
@@ -94,7 +91,6 @@ impl World {
             }
         }
     }
-    pub fn swap(&mut self, position1: Position, position2: Position) {}
     pub fn take(&mut self, position: Position) -> Option<Particle> {
         self.particles[position.i()][position.j()].take()
     }
