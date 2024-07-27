@@ -64,18 +64,36 @@ impl World {
         }
     }
 
-    pub fn can_move(&self, direction: Direction) -> bool {
+    pub fn can_move(&self, position: Position, direction: Direction) -> Option<Position> {
+        let new_i = position.i() as i32 + direction.i();
+        let new_j = position.j() as i32 + direction.j();
+
+        if new_i >= 0
+            && new_i < self.particles.len() as i32
+            && new_j >= 0
+            && new_j < self.particles[position.i()].len() as i32
+        {
+            if self.particles[new_i as usize][new_j as usize].is_none() {
+                return Some(pos(new_i as usize, new_j as usize));
+            } else {
+                return None;
+            }
+        } else {
+            return None
+        }
+    }
+    pub fn is_valid(&self, position: Position, direction: Direction) -> bool {
         todo!()
     }
-    pub fn move_to(&mut self, p1: Position, p2: Position) {}
-    pub fn swap(&mut self, p1: Position, p2: Position) {}
-    pub fn take(&mut self, p: Position) -> Option<Particle> {
-        todo!()
+    pub fn move_to(&mut self, position1: Position, position2: Position) {}
+    pub fn swap(&mut self, position1: Position, position2: Position) {}
+    pub fn take(&mut self, position: Position) -> Option<Particle> {
+        self.particles[position.i()][position.j()].take()
     }
-    pub fn is_empty(&self, p: Position) -> bool {
-        if let Some(_) = self.particles.get(p.i()) {
-            if let Some(_) = self.particles[p.i()].get(p.j()) {
-                if self.particles[p.i()][p.j()].is_none() {
+    pub fn is_empty(&self, position: Position) -> bool {
+        if let Some(_) = self.particles.get(position.i()) {
+            if let Some(_) = self.particles[position.i()].get(position.j()) {
+                if self.particles[position.i()][position.j()].is_none() {
                     return true;
                 } else {
                     return false;
@@ -83,5 +101,11 @@ impl World {
             }
         }
         false
+    }
+    pub fn particle_at(&mut self, position: Position) -> Option<&mut Particle> {
+        self.particles[position.i()][position.j()].as_mut()
+    }
+    pub fn set(&mut self, position: Position, particle: Particle) {
+        self.particles[position.i()][position.j()] = Some(particle);
     }
 }

@@ -24,7 +24,8 @@
 
 # improvements
 - [ ] text
-- [ ] add functions for world struct for manipulate particles
+- [x] add functions for world struct for manipulate particles
+    - set function that returns a result whether it could be placed or not 
 - [x] make the ui system good
     - 'element' trait or something so that there can be buttons and checkboxes etc with differnt look and functionality
 - [ ] remake graphics
@@ -32,6 +33,7 @@
     - with text rendering
     - with image rendering
     - with 'render layers' which are just like photoshop layers
+    - [ ] use pixels instead of minifb
 - [ ] remake particle system
 - [x] add color struct
     - [ ] with color manipulation functions

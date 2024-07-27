@@ -6,6 +6,7 @@ pub struct WindowDimensions {
     pub height: usize,
 }
 
+#[derive(Copy, Clone)]
 pub struct Position {
     i: usize,
     j: usize,
@@ -28,6 +29,10 @@ impl Position {
 pub fn pos(x: usize, y: usize) -> Position {
     Position { i: x, j: y }
 }
+pub fn offset(x: i32, y: i32) -> Direction {
+    Direction { x: x, y: y }
+}
+
 #[derive(Clone)]
 pub struct Rectangle {
     pub x: usize,
@@ -139,10 +144,53 @@ impl ops::SubAssign<Color> for Color {
     }
 }
 
-pub enum Direction {
-    Up,
-    Down,
-    Left,
-    Right,
-    Custom(usize),
+// pub enum Direction {
+//     Up,
+//     Down,
+//     Left,
+//     Right,
+//     Custom(Offset),
+// }
+//
+// impl Direction {
+//     pub fn as_custom(&self) -> Self {
+//         match self {
+//             Self::Up => Self::Custom(offset(0, 1)),
+//             Self::Down => Self::Custom(offset(0, -1)),
+//             Self::Left => Self::Custom(offset(-1, 0)),
+//             Self::Right => Self::Custom(offset(1, 0)),
+//             Self::Custom(offset) => Self::Custom(offset.clone()),
+//         }
+//     }
+// }
+
+#[derive(Clone)]
+pub struct Direction {
+    x: i32,
+    y: i32,
+}
+impl Direction {
+    pub fn new(x: i32, y: i32) -> Self {
+        Direction { x, y }
+    }
+
+    pub fn up() -> Self {
+        Direction { x: 0, y: -1 }
+    }
+    pub fn down() -> Self {
+        Direction { x: 0, y: 1 }
+    }
+    pub fn left() -> Self {
+        Direction { x: -1, y: 0 }
+    }
+    pub fn right() -> Self {
+        Direction { x: 1, y: 1 }
+    }
+
+    pub fn i(&self) -> i32 {
+        self.x
+    }
+    pub fn j(&self) -> i32 {
+        self.y
+    }
 }
