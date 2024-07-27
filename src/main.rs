@@ -38,7 +38,7 @@ fn main() {
     ui.init(&gfx);
 
     while gfx.window.is_open() {
-        if !ui.focused {
+        if !ui.focused() {
             if let Some((x, y)) = gfx.window.get_mouse_pos(MouseMode::Discard) {
                 if gfx.window.get_mouse_down(MouseButton::Left) {
                     gfx.window.set_cursor_style(CursorStyle::Crosshair);

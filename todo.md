@@ -7,9 +7,9 @@
 - [x] make water and sand simulation code less messy
 - [ ] particles phasing through things
 - [x] make sand physics less liquid-like
-- [ ] fix placing particles on left and right of world makes them not have physics
+- [x] fix placing particles on left and right of world makes them not have physics
 - [x] clean up main function
-- [ ] clicking on a particle button spawns a particle apart from the last button
+- [x] clicking on a particle button spawns a particle apart from the last button
 
 # features
 - [x] add acid

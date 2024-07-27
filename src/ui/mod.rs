@@ -17,13 +17,11 @@ pub trait UiObject {
 }
 
 pub struct Ui {
-    pub focused: bool,
     pub objects: Vec<Box<dyn UiObject>>,
 }
 impl Ui {
     pub fn new() -> Self {
         Self {
-            focused: false,
             objects: vec![],
         }
     }
@@ -37,12 +35,19 @@ impl Ui {
     pub fn step(&mut self, gfx: &mut Graphics, world: &mut World) {
         for obj in &mut self.objects {
             obj.step(gfx, world);
-            self.focused = obj.focused();
         }
     }
     pub fn draw(&mut self, gfx: &mut Graphics) {
         for obj in &mut self.objects {
             gfx.rectangle(obj.rect(), obj.color());
         }
+    }
+    pub fn focused(&self) -> bool {
+        for obj in &self.objects {
+            if obj.focused() {
+                return true
+            }
+        }
+        false
     }
 }
