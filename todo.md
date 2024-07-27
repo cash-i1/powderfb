@@ -23,6 +23,7 @@
 - [ ] add 'asleep' to particles so they stop simulating if no one interacts with them
 
 # improvements
+- [ ] make everything 'i' and 'j' over using all 'i', 'j', 'x' and 'y'
 - [ ] text
 - [x] add functions for world struct for manipulate particles
     - set function that returns a result whether it could be placed or not 

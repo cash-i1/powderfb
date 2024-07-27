@@ -21,13 +21,15 @@ impl Simulate {
         }
     }
     pub fn basic(world: &mut World, pos: Position) {
-        if let Some(particle) = world.take(pos) {
-            if let Some(new_pos) = world.can_move(pos, Direction::down()) {
-                world.set(new_pos, particle);
-            } else {
-                world.set(pos, particle);
-            }
-        }
+        // if let Some(particle) = world.take(pos) {
+        //     if let Some(new_pos) = world.can_move(pos, Direction::down()) {
+        //         world.set(new_pos, particle);
+        //     } else {
+        //         world.set(pos, particle);
+        //     }
+        // }
+
+        world.try_move(pos, pos.modify(|p| *p.j_mut() += 1));
     }
     pub fn sand(world: &mut World, pos: Position) {
         if let Some(particle) = world.particles[pos.i()][pos.j()].take() {

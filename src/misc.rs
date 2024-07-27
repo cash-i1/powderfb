@@ -1,5 +1,5 @@
 use rand::Rng;
-use std::ops::{self, Add};
+use std::{env::Args, ops::{self, Add}, process::Output};
 
 pub struct WindowDimensions {
     pub width: usize,
@@ -18,11 +18,21 @@ impl Position {
     pub fn j(&self) -> usize {
         self.j
     }
-    pub fn x(&self) -> usize {
-        self.i
+
+    pub fn i_mut(&mut self) -> &mut usize {
+        &mut self.i
     }
-    pub fn y(&self) -> usize {
-        self.j
+    pub fn j_mut(&mut self) -> &mut usize {
+        &mut self.j
+    }
+
+    pub fn modify<F>(&self, f: F) -> Self 
+    where
+        F: FnOnce(&mut Self),
+    {
+        let mut new_self = self.clone();
+        f(&mut new_self);
+        new_self
     }
 }
 

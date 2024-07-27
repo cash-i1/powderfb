@@ -79,13 +79,21 @@ impl World {
                 return None;
             }
         } else {
-            return None
+            return None;
         }
     }
     pub fn is_valid(&self, position: Position, direction: Direction) -> bool {
         todo!()
     }
-    pub fn move_to(&mut self, position1: Position, position2: Position) {}
+    pub fn try_move(&mut self, position1: Position, position2: Position) {
+        if let Some(particle) = self.take(position1) {
+            if self.is_available(position2) {
+                self.set(position2, particle);
+            } else {
+                self.set(position1, particle);
+            }
+        }
+    }
     pub fn swap(&mut self, position1: Position, position2: Position) {}
     pub fn take(&mut self, position: Position) -> Option<Particle> {
         self.particles[position.i()][position.j()].take()
@@ -107,5 +115,17 @@ impl World {
     }
     pub fn set(&mut self, position: Position, particle: Particle) {
         self.particles[position.i()][position.j()] = Some(particle);
+    }
+    pub fn is_available(&self, position: Position) -> bool {
+        if position.i() < self.particles.len() && position.j() < self.particles[position.i()].len()
+        {
+            if self.particles[position.i() as usize][position.j() as usize].is_none() {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
